@@ -1,3 +1,9 @@
+// Name: Helwa Halloum
+// Mod Title: Rocket Patrol: Juan Edition
+// Completion Time: started: jan 30, 3pm (1.5 hour), jan 31, 4pm ()
+// Mods: Create a new title screen, looping background music, 4th rocket
+
+
 let config = {
     type: Phaser.AUTO,
     width: 640,

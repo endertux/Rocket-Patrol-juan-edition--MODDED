@@ -25,6 +25,7 @@ preload() {
     this.load.audio('sfx-select', './assests/sfx-select.wav')
     this.load.audio('sfx-explosion', './assests/sfx-explosion.wav')
     this.load.audio('sfx-shot', './assests/sfx-shot.wav')
+    this.load.audio('background_music', 'assests/Rip&Tear_DoomOST.mp3');
 }
 
     create() {
@@ -41,9 +42,9 @@ preload() {
         let menuConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
-            backroundColor: '#F3B141',
+            backgroundColor: '#F3B141',
             color: '#843605',
-            allign: 'right',
+            align: 'right',
             padding: {
                 top: 5,
                 bottom: 5,
@@ -51,7 +52,7 @@ preload() {
             fixedWidth: 0
         }
 
-        
+
         // title screen
         this.add.sprite(310, 250, 'background_image')
         this.add.sprite(310, 250, 'game_name')
@@ -60,6 +61,11 @@ preload() {
         // define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT)
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT)
+
+        // looping music
+        var music = this.sound.add('background_music');
+        music.setLoop(true);
+        music.play();
     }
 
     update() {
@@ -76,7 +82,7 @@ preload() {
             // hard mode
             game.settings = {
                 spaceshipSpeed: 4,
-                gameTimer: 60000
+                gameTimer: 40000
             }
             this.sound.play('sfx-select')
             this.scene.start('playScene')
