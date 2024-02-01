@@ -1,6 +1,7 @@
 class Menu extends Phaser.Scene {
     constructor() {
         super("menuScene")
+        
     }
 
 preload() {
@@ -25,7 +26,8 @@ preload() {
     this.load.audio('sfx-select', './assests/sfx-select.wav')
     this.load.audio('sfx-explosion', './assests/sfx-explosion.wav')
     this.load.audio('sfx-shot', './assests/sfx-shot.wav')
-    this.load.audio('background_music', 'assests/Rip&Tear_DoomOST.mp3');
+    this.load.audio('background_music', 'assests/Rip&Tear_DoomOST.mp3')
+    this.load.audio('music_2', 'assests/Yours Today!.mp3')
 }
 
     create() {
@@ -63,9 +65,16 @@ preload() {
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT)
 
         // looping music
-        var music = this.sound.add('background_music');
-        music.setLoop(true);
-        music.play();
+        this.bgMusic = this.sound.add('music_2', {volume: 0.5, loop: true})
+        
+        if (!this.musicPlayed) {  // keeps music from overlaping
+        this.bgMusic.play()
+        this.musicPlayed = true
+        }
+
+        if (this.musicPlayed && this.scene.isActive('playScene')) {
+        this.musicPlayed = false
+        }
     }
 
     update() {
@@ -87,5 +96,8 @@ preload() {
             this.sound.play('sfx-select')
             this.scene.start('playScene')
         }
+
+        
     }
+
 }
