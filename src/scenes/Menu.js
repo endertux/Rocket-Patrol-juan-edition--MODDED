@@ -67,14 +67,15 @@ preload() {
         // looping music
         this.bgMusic = this.sound.add('music_2', {volume: 0.5, loop: true})
         
-        if (!this.musicPlayed) {  // keeps music from overlaping
+        if (!this.musicPlayed) {  
         this.bgMusic.play()
         this.musicPlayed = true
         }
 
-        if (this.musicPlayed && this.scene.isActive('playScene')) {
+        if (this.musicPlayed && this.scene.isActive('playScene')) { // keeps music from overlaping
         this.musicPlayed = false
         }
+
     }
 
     update() {

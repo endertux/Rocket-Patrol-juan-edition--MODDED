@@ -25,7 +25,7 @@ class Play extends Phaser.Scene {
         this.ship03 = new Spaceship(this, game.config.width, borderUISize*6 + borderPadding*4, 'spaceship', 0, 10).setOrigin(0,0)
         this.ship04 = new Spaceship(this, game.config.width - borderUISize, borderUISize * 7 + borderPadding * 6, 'spaceship', 0, 15).setOrigin(0, 0);
 
-         // properties for new spaceship
+        // properties for new spaceship
         this.ship04.setSpeed(8);
         this.ship04.setScale(0.5);
         this.ship04.points = 50;
@@ -35,7 +35,8 @@ class Play extends Phaser.Scene {
         keyRESET = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R)
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT)
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT)
-
+        
+        
         // initialize score
         this.p1Score = 0
 
@@ -43,9 +44,9 @@ class Play extends Phaser.Scene {
         let scoreConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
-            backroundColor: '#F3B141',
+            backgroundColor: '#F3B141',
             color: '#843605',
-            allign: 'right',
+            align: 'right',
             padding: {
                 top: 5,
                 bottom: 5,
@@ -57,11 +58,23 @@ class Play extends Phaser.Scene {
         // GAME OVER flag
         this.gameOver = false
 
+        // FIRE! UI
+        this.fireText = this.add.text(game.config.width / 2, game.config.height / 2, 'FIRE!', {
+            fontFamily: 'Arial',
+            fontSize: '32px',
+            color: '#FF0000',
+            fontWeight: 'bold'
+        }).setOrigin(0.5)
+        // hide FIRE!
+        this.time.delayedCall(2000, () => {
+            this.fireText.visible = false
+        })
+
         // 60-sec play clock
         scoreConfig.fixedWidth = 0
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5)
-            this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or <-- for Menu', scoreConfig).setOrigin(0.5)
+            this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5)
             this.gameOver = true
         }, null, this)
     }
@@ -129,5 +142,12 @@ class Play extends Phaser.Scene {
         this.p1Score += ship.points
         this.scoreLeft.text = this.p1Score
         this.sound.play('sfx-explosion')
+
+
+        // FIRE! check
+        if (Phaser.Input.Keyboard.JustDown(keyFIRE)) {
+            this.fireText.visible = false
+        }
+
     }
 }
