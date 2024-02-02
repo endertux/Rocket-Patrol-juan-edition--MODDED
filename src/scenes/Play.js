@@ -69,7 +69,7 @@ class Play extends Phaser.Scene {
         this.time.delayedCall(2000, () => {
             this.fireText.visible = false
         })
-
+       
         // 60-sec play clock
         scoreConfig.fixedWidth = 0
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
@@ -77,6 +77,11 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5)
             this.gameOver = true
         }, null, this)
+
+        // in game timer (got helped by Franchesca B.)
+        this.ingameTimer = 0
+        this.timerText = this.add.text(game.config.width/2 + borderUISize*6 + borderPadding*2 + 14, borderPadding*5, this.ingameTimer, scoreConfig).setOrigin(0.0)
+
     }
 
     update() {
@@ -114,7 +119,12 @@ class Play extends Phaser.Scene {
             this.p1Rocket.reset()
             this.shipExplode(this.ship04)
         }
+
+        // in game timer update (helped by Franchesca B.)
+        this.ingameTimer = Math.floor((game.settings.gameTimer - this.clock.elapsed)/1000)
+        this.timerText.text = this.ingameTimer
     }
+
 
     checkCollision(rocket, ship) {
         // simple AABB checking
@@ -127,7 +137,8 @@ class Play extends Phaser.Scene {
           return false
         }
       }
-    shipExplode(ship) {
+    
+      shipExplode(ship) {
         // temporarily hide ship
         ship.alpha = 0
         // create explosion sprite at ship's position
@@ -138,16 +149,16 @@ class Play extends Phaser.Scene {
             ship.alpha = 1                     // make ship visible again
             boom.destroy()                     // remove explosion sprite
         })
+
         // score add and text update
         this.p1Score += ship.points
         this.scoreLeft.text = this.p1Score
         this.sound.play('sfx-explosion')
 
-
         // FIRE! check
         if (Phaser.Input.Keyboard.JustDown(keyFIRE)) {
             this.fireText.visible = false
         }
+        }
 
     }
-}

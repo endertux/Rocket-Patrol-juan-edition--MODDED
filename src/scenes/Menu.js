@@ -15,6 +15,7 @@ preload() {
     this.load.image('rocket', './assests/rocket.png')
     this.load.image('spaceship', './assests/spaceship.png')
     this.load.image('starfield', './assests/starfield.png')
+    this.load.image('bullet1', './assests/bullet1.png')
     // load spritesheet
     this.load.spritesheet('explosion', './assests/explosion.png', {
         frameWidth: 64,
@@ -65,6 +66,8 @@ preload() {
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT)
 
         // looping music
+        // song: Yours Today! - Lexx Strange 
+            // https://soundcloud.com/lexxstrange/yours-today
         this.bgMusic = this.sound.add('music_2', {volume: 0.5, loop: true})
         
         if (!this.musicPlayed) {  
