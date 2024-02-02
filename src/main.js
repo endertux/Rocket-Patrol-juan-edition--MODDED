@@ -1,6 +1,7 @@
 // Name: Helwa Halloum
 // Mod Title: Rocket Patrol: Juan Edition
-// Completion Time: started: jan 30, 3pm (1.5 hour), jan 31, 4pm-1:49am (), feb 1 12pm-6:30pm ()
+// Completion Time: 
+    // started: jan 30, 3pm (1.5 hours), jan 31, 4pm-1:49am (10 hrs), feb 1 12pm-6:30pm (6 hrs)
 // Mods: 
     // 4th rocket(5),
     // display time(3)
